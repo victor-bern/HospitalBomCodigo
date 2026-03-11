@@ -10,9 +10,10 @@ namespace HospitalBomCodigo.Models
         public string Type { get; set; }
         public string? Description { get; set; }
         public ExamStatus Status { get; set; } = ExamStatus.Pending;
-
         public bool NotificationSent { get; set; }
         public DateTime? ResultReleasedAt { get; set; }
+        public Guid PatientId { get; set; }
+        public Patient Patient { get; set; }
 
     }
 
