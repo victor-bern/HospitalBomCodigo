@@ -30,5 +30,8 @@ namespace HospitalBomCodigo.Context
             modelBuilder.Entity<Exam>()
                 .HasData(exams);
         }
+
+
+        public DbSet<Exam> Exams { get; set; }
     }
 }

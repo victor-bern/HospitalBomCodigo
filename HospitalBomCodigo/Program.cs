@@ -4,6 +4,8 @@ using Microsoft.Extensions.Hosting;
 
 var builder = Host.CreateApplicationBuilder(args);
 
+builder.Services.AddDbContext<AppDbContext>();
+
 using var host = builder.Build();
 
 using var scope = host.Services.CreateScope();
