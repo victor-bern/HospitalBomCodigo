@@ -1,8 +1,5 @@
 ﻿using HospitalBomCodigo.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HospitalBomCodigo.Context
 {
@@ -15,6 +12,30 @@ namespace HospitalBomCodigo.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            string[] tiposExames = {
+                "Hemograma Completo",
+                "Glicose em Jejum",
+                "Colesterol Total e Frações",
+                "Creatinina (Função Renal)",
+                "Transaminase Oxalacética (TGO)",
+                "Transaminase Pirúvica (TGP)",
+                "Ureia",
+                "Ácido Úrico",
+                "TSH (Hormônio Tireoestimulante)",
+                "Vitamina D (25-hidroxivitamina D)",
+                "Vitamina B12",
+                "Exame de Urina (EAS)",
+                "Urocultura com Antibiograma",
+                "Exame de Fezes (EPF)",
+                "Raio-X de Tórax",
+                "Eletrocardiograma (ECG)",
+                "Proteína C Reativa (PCR)",
+                "Tempo de Protrombina (TAP)",
+                "Hemoglobina Glicada",
+                "Beta HCG (Teste de Gravidez)"
+            };
+
+
             modelBuilder.Entity<Exam>()
                 .HasKey(x => x.Id);
 
@@ -37,7 +58,7 @@ namespace HospitalBomCodigo.Context
             var examFaker = new Bogus.Faker<Exam>()
                 .RuleFor(x => x.Id, f => Guid.NewGuid())
                 .RuleFor(x => x.PatientId, f => f.PickRandom(patientsId))
-                .RuleFor(x => x.Type, f => f.PickRandom(new[] { "Exame de Sangue", "Raio-X", "MRI" }))
+                .RuleFor(x => x.Type, f => f.PickRandom(tiposExames))
                 .RuleFor(x => x.Description, f => f.Lorem.Sentence())
                 .RuleFor(x => x.Status, f => ExamStatus.Pending);
 

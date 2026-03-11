@@ -32,6 +32,7 @@ namespace HospitalBomCodigo.Workers
                 var pendingExams = await context.Exams
                     .Where(e => e.Status == ExamStatus.Released && !e.NotificationSent)
                     .OrderBy(e => e.Status)
+                    .Include(x => x.Patient)
                     .Take(20)
                     .ToListAsync(stoppingToken);
 
@@ -40,11 +41,14 @@ namespace HospitalBomCodigo.Workers
                 foreach (var exam in pendingExams)
                 {
                     _logger.LogInformation(
-                        "SMS Enviado: Prezado cliente, os resultados dos seus exames estão disponíveis para retirada. \n" +
-                        "[Tipo: {Type} | Descrição: {Description} | Liberado em: {ReleasedAt}]",
+                        "SMS Enviado: Prezado(a) cliente, {FirstName}, os resultados dos seus exames estão disponíveis para retirada. \n" +
+                        "[Tipo: {Type} | Descrição: {Description} | Liberado em: {ReleasedAt} | Enviado para: {Number}]",
+                        exam.Patient.Name,
                         exam.Type,
                         exam.Description,
-                        exam.ResultReleasedAt);
+                        exam.ResultReleasedAt,
+                        exam.Patient.PhoneNumber
+                        );
 
                     exam.NotificationSent = true;
                 }
