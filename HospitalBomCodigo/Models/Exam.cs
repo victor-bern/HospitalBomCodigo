@@ -6,13 +6,13 @@ namespace HospitalBomCodigo.Models
 {
     public class Exam
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
         public string Type { get; set; }
-        public string? Description { get; private set; }
-        public ExamStatus Status { get; private set; } = ExamStatus.Pending;
+        public string? Description { get; set; }
+        public ExamStatus Status { get; set; } = ExamStatus.Pending;
 
-        public bool NotificationSent { get; private set; }
-        public DateTime? ResultReleasedAt { get; private set; }
+        public bool NotificationSent { get; set; }
+        public DateTime? ResultReleasedAt { get; set; }
 
     }
 
