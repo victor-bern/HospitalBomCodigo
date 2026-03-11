@@ -22,7 +22,9 @@ namespace HospitalBomCodigo.Workers
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("ProcessExamBackgroundWorker is running at: {time}", DateTimeOffset.Now);
+                TimeZoneInfo brazilZone = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
+
+                _logger.LogInformation("ProcessExamBackgroundWorker is running at: {time}", DateTime.Now);
                 using var scope = _services.CreateScope();
 
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -39,7 +41,7 @@ namespace HospitalBomCodigo.Workers
                 {
                     await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
                     exam.Status = Models.ExamStatus.Released;
-                    exam.ResultReleasedAt = DateTime.UtcNow;
+                    exam.ResultReleasedAt = DateTime.Now;
                 }
 
                 try
