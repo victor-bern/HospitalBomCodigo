@@ -23,8 +23,6 @@ namespace HospitalBomCodigo.Workers
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker varrendo exames liberados às: {time}", DateTimeOffset.Now);
-
                 using var scope = _services.CreateScope();
 
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
