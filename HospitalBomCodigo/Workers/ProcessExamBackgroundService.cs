@@ -54,7 +54,7 @@ namespace HospitalBomCodigo.Workers
                 }
 
 
-                await Task.Delay(TimeSpan.FromSeconds(120), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
             }
         }
     }
