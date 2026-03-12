@@ -38,3 +38,9 @@ docker run --rm hospitalbomcodigo
 - Abra a pasta do repositório
 - Instale a extensão C# (OmniSharp)
 - Use o terminal integrado para rodar os comandos dotnet acima ou crie uma configuração em .vscode/launch.json
+
+# Decisões Tomadas
+ - Decidi usar 2 workers pra não travar a thread principal sendo eles:
+    - Um para simular os processamentos dos exames pra serem liberados
+    - Um para simular envio dos exames via sms, no caso aqui é apenas uma mensagem no console
+ - Docker para facilitar a execução do projeto, sem precisar carregar nada ou até mesmo ter o .net instalado.
